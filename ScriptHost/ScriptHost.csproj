@@ -35,7 +35,7 @@
       <HintPath>3rdParty\CSScriptLibrary\CSScriptLibrary.dll</HintPath>
     </Reference>
     <Reference Include="ObjectListView">
-      <HintPath>.\ObjectListView.dll</HintPath>
+      <HintPath>..\3rdParty\ObjectListView\ObjectListView.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
