@@ -1,6 +1,6 @@
 Rotator's FOnline tools
 --------
-This repository contains various tools created by Rotator's for use with the [FOnline Engine SDK](https://github.com/rotators/fosdk).
+This repository contains various tools created by Rotators for use with the [FOnline Engine SDK](https://github.com/rotators/fosdk).
 
 Check each projects readme file for a more in-depth description of each tool:
 
