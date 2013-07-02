@@ -74,16 +74,16 @@ void ParseBuf(char* buf)
 	Map[key]=val;
 }
 
+int BufState=0;
 void ParseBufVC(char* buf, const string& filter_modules, const string& filter_disabled, const string& filter_headers)
 {
-	int buf_state=0;
 	static bool ignore_files=false;
 	string line(buf);
-	switch(buf_state)
+	switch(BufState)
 	{
 	case 0: // expect filter start (set state to 1) or just a line (state =0)
 		{
-			if(line.find("<Filter")!=-1) buf_state++;
+			if(line.find("<Filter")!=-1) BufState++;
 			ProjLines.push_back(line);
 			break;
 		}
@@ -97,7 +97,7 @@ void ParseBufVC(char* buf, const string& filter_modules, const string& filter_di
 				ProjAssoc[ProjLines.size()+4]=name;
 				ignore_files=true;
 			}
-			buf_state++;
+			BufState++;
 			ProjLines.push_back(line);
 			break;
 		}
@@ -105,7 +105,7 @@ void ParseBufVC(char* buf, const string& filter_modules, const string& filter_di
 	case 3: // state++
 	case 4: // state++
 		{
-			buf_state++;
+			BufState++;
 			ProjLines.push_back(line);
 			break;
 		}
@@ -114,7 +114,7 @@ void ParseBufVC(char* buf, const string& filter_modules, const string& filter_di
 			// end of filter?
 			if(line.find("</Filter>")!=-1)
 			{
-				buf_state=0;
+				BufState=0;
 				ignore_files=false;
 				ProjLines.push_back(line);
 				break;
@@ -126,8 +126,8 @@ void ParseBufVC(char* buf, const string& filter_modules, const string& filter_di
 	case 8: // state++
 		{
 			if(!ignore_files) ProjLines.push_back(line);
-			buf_state++;
-			if(buf_state>8) buf_state=5;
+			BufState++;
+			if(BufState>8) BufState=5;
 			break;
 		}
 	default: ;
@@ -218,12 +218,20 @@ bool RecursiveParse(string& file_name, string& dir)
 	while(fgets(buf,4096,f))
 	{
 		int pre=0;
-		while(isSpace(buf[pre]) && buf[pre]) pre++;
+		while(buf[pre] && isSpace(buf[pre])) pre++;
 		if(!buf[pre] || buf[pre]!='#') continue;
+
+		// buf[pre] == '#'
+		int post = pre + 1;
+		while(buf[post] && isSpace(buf[post])) post++;
+		if(!buf[post]) continue;
+
 		string line(buf);
+		line.erase(pre, post - pre);
+
 		StrVec vec;
 		strsplit(line,vec);
-		if(!vec[0].compare("#define") && !IGNORING)
+		if(!vec[0].compare("define") && !IGNORING)
 		{
 			if(vec.size()<1) continue; // err
 			string def=vec[1];
@@ -232,7 +240,7 @@ bool RecursiveParse(string& file_name, string& dir)
 			Defines.insert(def);
 			continue;
 		}
-		else if(!vec[0].compare("#include") && !IGNORING)
+		else if(!vec[0].compare("include") && !IGNORING)
 		{
 			if(vec.size()<1) continue; // err
 			string incname=vec[1];
@@ -257,7 +265,7 @@ bool RecursiveParse(string& file_name, string& dir)
 
 			continue;
 		}
-		else if(!vec[0].compare("#ifdef"))
+		else if(!vec[0].compare("ifdef"))
 		{
 			if(vec.size()<1) continue; // err
 			string def=vec[1];
@@ -267,7 +275,7 @@ bool RecursiveParse(string& file_name, string& dir)
 			Depth++;
 			continue;
 		}
-		else if(!vec[0].compare("#ifndef"))
+		else if(!vec[0].compare("ifndef"))
 		{
 			if(vec.size()<1) continue; // err
 			string def=vec[1];
@@ -277,13 +285,13 @@ bool RecursiveParse(string& file_name, string& dir)
 			Depth++;
 			continue;
 		}
-		else if(!vec[0].compare("#endif"))
+		else if(!vec[0].compare("endif"))
 		{
 			Depth--;
 			if(Depth<0) Depth=0; // err
 			if(Depth<IgnoreDepth) IgnoreDepth--;
 		}
-		else if(!vec[0].compare("#undef") && !IGNORING)
+		else if(!vec[0].compare("undef") && !IGNORING)
 		{
 			if(vec.size()<1) continue; // err
 			string def=vec[1];
@@ -311,6 +319,7 @@ bool ProcessComponent(const char* comp_name, const string& vc_name, const string
 		return false;
 	}
 
+	BufState=0;
 	while(fgets(buf,1024,vc_file))
 	{
 		ParseBufVC(buf,filter_modules,filter_disabled,filter_headers);
