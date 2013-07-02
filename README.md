@@ -10,5 +10,5 @@ Check each projects readme file for a more in-depth description of each tool:
   * [MacGyver](MacGyver/README.md) [C#] - A tool for editing crafting recipes.
   * ObjectEditor [C#] - A tool for editing items/objects.
   * [SolutionTools](SolutionTools/README.md) [C#, C++] - A set of tools for integrating FOnline AS into MSVC.
-  * ScriptHost [C#] - A wrapper around the excellent C# Script execution engine by Oleg Shiro, making it easy to implement script support in other C# applications.
+  * ScriptHost [C#] - A wrapper around the excellent C# Script execution engine by Oleg Shilo, making it easy to implement script support in other C# applications.
   * [WorldEditor](WorldEditor/README.md) [C#] - WorldEditor is an editor for the FOnline engine, created to make the development process more accessible and faster. It can handle most gamedata.
