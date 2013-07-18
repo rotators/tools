@@ -93,7 +93,7 @@
     <Compile Include="Controls\Console.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Debug\DebugManager.cs" />
+    <Compile Include="DebugManager.cs" />
     <Compile Include="Display.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="EditorData.cs" />
