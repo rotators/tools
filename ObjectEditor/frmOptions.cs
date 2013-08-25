@@ -52,7 +52,7 @@ namespace ObjectEditor
         private void frmOptions_Load(object sender, EventArgs e)
         {
             if(cmbLanguage.Items.Count==0)
-                cmbLanguage.Items.AddRange(Directory.GetFiles(".\\", "*.lang"));
+                cmbLanguage.Items.AddRange(Directory.GetFiles("." + Path.DirectorySeparatorChar, "*.lang"));
             SetControls(true);
         }
 

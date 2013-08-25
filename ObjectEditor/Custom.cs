@@ -66,7 +66,7 @@ namespace ObjectEditor
         public void ParseFlags()
         {
             CustomFlags.Clear();
-            List<String> Lines = new List<string>(File.ReadAllLines(".\\Flags.cfg"));
+            List<String> Lines = new List<string>(File.ReadAllLines("." + Path.DirectorySeparatorChar + "Flags.cfg"));
             char[] Sep = { ',' };
             
             foreach (String Line in Lines)
@@ -247,7 +247,7 @@ namespace ObjectEditor
             Objects.Clear();
             CustomFields.Clear();
 
-            List<String> Lines = new List<string>(File.ReadAllLines(".\\Custom.cfg", Encoding.UTF8));
+            List<String> Lines = new List<string>(File.ReadAllLines("." + Path.DirectorySeparatorChar + "Custom.cfg", Encoding.UTF8));
             Lines.Add("");
 
             for(int i=0;i<Lines.Count;i++)

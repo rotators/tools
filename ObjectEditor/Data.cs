@@ -157,13 +157,13 @@ namespace ObjectEditor
                     if (kvp.Key.StartsWith("DAMAGE_")) DamageTypes.Add((Cfg.StripPrefix ? kvp.Key.Remove(0, 7) : kvp.Key), kvp.Value);
                 }
 
-                if (!File.Exists(Cfg.PathDataFolder + "\\DefineNames.lst"))
+                if (!File.Exists(Cfg.PathDataFolder + Path.DirectorySeparatorChar + "DefineNames.lst"))
                 {
                     Message.Show("Can't find DefinesNames.lst", MessageBoxButtons.OK, MessageBoxIcon.Error, true);
                     return false;
                 }
 
-                List<String> Lines = new List<String>(File.ReadAllLines(Cfg.PathDataFolder + "\\DefineNames.lst", Encoding.UTF8));
+                List<String> Lines = new List<String>(File.ReadAllLines(Cfg.PathDataFolder + Path.DirectorySeparatorChar + "DefineNames.lst", Encoding.UTF8));
                 bool PAnim1 = false;
                 bool PAnim2 = false;
                 bool PSkills = false;
@@ -197,14 +197,14 @@ namespace ObjectEditor
                     else if (Line.Contains("---SKILLS---")) PSkills = true;
                 }
 
-                if (!File.Exists(Cfg.PathDataFolder + "\\ItemNames.lst"))
+                if (!File.Exists(Cfg.PathDataFolder + Path.DirectorySeparatorChar +"ItemNames.lst"))
                 {
                     Message.Show("Can't find ItemNames.lst", MessageBoxButtons.OK, MessageBoxIcon.Error, true);
                     return false;
                 }
 
                 CurrentFile = "ItemNames.lst";
-                Lines = new List<String>(File.ReadAllLines(Cfg.PathDataFolder + "\\ItemNames.lst", Encoding.UTF8));
+                Lines = new List<String>(File.ReadAllLines(Cfg.PathDataFolder + Path.DirectorySeparatorChar + "ItemNames.lst", Encoding.UTF8));
                 foreach (String Line in Lines)
                 {
                     CurrentLine = Line;

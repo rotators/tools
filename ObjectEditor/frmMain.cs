@@ -52,8 +52,8 @@ namespace ObjectEditor
             }
             Config.Load();
 
-            Utils.InitLog(".\\ObjectEditor.log");
-            FOCommon.Utils.InitLog(".\\ObjectEditor.log", false);
+            Utils.InitLog("." + Path.DirectorySeparatorChar + "ObjectEditor.log");
+            FOCommon.Utils.InitLog("." + Path.DirectorySeparatorChar + "ObjectEditor.log", false);
             Utils.Log("Initializing Object Editor " + Utils.GetVersion() + " compatible with " + Utils.GetFormatCompatibilityVersion() + " format.");
             Utils.Log(FOCommon.Utils.GetCLRInfo());
 
@@ -94,7 +94,7 @@ namespace ObjectEditor
             Config.WindowSizeX = this.Size.Width;
             Config.WindowSizeY = this.Size.Height;
             Config.Save();
-            Utils.SerializeObjectListView(".\\listview.bin", ref lstProtos, false);
+            Utils.SerializeObjectListView("." + Path.DirectorySeparatorChar + "listview.bin", ref lstProtos, false);
        
             WinAPI.UnsetWindowExFlag(this.Handle, (int)Win32.WS_EX_COMPOSITED);
             WinAPI.UnsetWindowExFlag(this.Handle, (int)Win32.WS_EX_LAYERED);
@@ -139,7 +139,7 @@ namespace ObjectEditor
                 Exit();
 
             OptionsForm = new frmOptions(Config);
-            Utils.SerializeObjectListView(".\\listview.bin", ref lstProtos, true);
+            Utils.SerializeObjectListView("." + Path.DirectorySeparatorChar + "listview.bin", ref lstProtos, true);
             InitGuiDefines();
             SetListViewFormatters();
 
@@ -317,7 +317,7 @@ namespace ObjectEditor
                             if (Path.IsPathRooted(Line))
                                 LoadFileName(Line);
                             else
-                                LoadFileName(Path.GetDirectoryName(FileName) + "\\" + Line);
+                                LoadFileName(Path.GetDirectoryName(FileName) + Path.DirectorySeparatorChar + Line);
                         }
                     }
                     else

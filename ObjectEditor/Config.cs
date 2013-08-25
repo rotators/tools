@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ObjectEditor
 {
@@ -30,8 +31,8 @@ namespace ObjectEditor
             : base(ConfigName)
         {
             
-            AddConfigItem(false, "Paths",  "NamesFolder",           "PathDataFolder",        ".\\data\\");
-            AddConfigItem(false, "Paths",  "Scripts",               "PathEditorScript",      ".\\scripts\\");
+            AddConfigItem(false, "Paths",  "NamesFolder",           "PathDataFolder",        "." + Path.DirectorySeparatorChar + "data" + Path.DirectorySeparatorChar);
+            AddConfigItem(false, "Paths",  "Scripts",               "PathEditorScript",      "." + Path.DirectorySeparatorChar + "scripts" + Path.DirectorySeparatorChar);
             AddConfigItem(false, "Paths",  "ObjMsg",                "PathObjMsg",            "FOOBJ.MSG");
             AddConfigItem(false, "Paths",  "Defines",               "PathDefines",           "_defines.fos");
             AddConfigItem(true,  "Paths",  "Language",              "PathLanguage",          "");
