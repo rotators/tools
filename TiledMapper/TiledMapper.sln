@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiledMapper", "TiledMapper.csproj", "{38DE51C6-4B1A-4687-8E0F-0B42A9E1DD0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FOnlineCommon", "..\FOCommon\FOCommon.csproj", "{D53538FB-D9E6-4FE7-9E19-E2EF4330D81E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FOCommon", "..\..\FOCommon\FOCommon.csproj", "{D53538FB-D9E6-4FE7-9E19-E2EF4330D81E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
