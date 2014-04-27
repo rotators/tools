@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectEditor", "ObjectEdito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DATLib", "..\DATLib\DATLib.csproj", "{CAD53BCA-DC4B-4BDD-8199-5CD640C47CC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FOCommon", "..\..\FOCommon\FOCommon.csproj", "{D53538FB-D9E6-4FE7-9E19-E2EF4330D81E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FOCommon", "..\FOCommon\FOCommon.csproj", "{D53538FB-D9E6-4FE7-9E19-E2EF4330D81E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptHost", "..\ScriptHost\ScriptHost.csproj", "{C3A00B4A-96DC-436F-8F7B-C0D71D644545}"
 EndProject
