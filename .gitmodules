@@ -1,0 +1,3 @@
+[submodule "FOCommon"]
+	path = FOCommon
+	url = https://github.com/rotators/FOCommon.git
