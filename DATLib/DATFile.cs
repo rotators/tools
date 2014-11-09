@@ -15,6 +15,7 @@ namespace DATLib
         public byte[] Buffer { get; set; } // Whole file
         public long FileIndex { get; set; }
         public long FileNameSize { get; set; }
+        public string ErrorMsg { get; set; }
 
         private byte[] compressStream(MemoryStream mem)
         {
@@ -42,9 +43,9 @@ namespace DATLib
 
         private byte[] decompressStream(MemoryStream mem)
         {
-            MemoryStream outStream = new MemoryStream();
-            zlib.ZOutputStream outZStream = new zlib.ZOutputStream(outStream);
             byte[] data;
+            using (MemoryStream outStream = new MemoryStream())
+            using (zlib.ZOutputStream outZStream = new zlib.ZOutputStream(outStream))
             try
             {
                 byte[] buffer = new byte[512];
@@ -56,10 +57,14 @@ namespace DATLib
                 outZStream.Flush();
                 data = outStream.ToArray();
             }
+            catch(zlib.ZStreamException ex)
+            {
+                ErrorMsg = ex.Message;
+                return null;
+            }
             finally
             {
-                outZStream.Close();
-                outStream.Close();
+                outZStream.finish();
             }
             return data;
         }
@@ -81,8 +86,8 @@ namespace DATLib
         {
             if (Compression == 0x01)
             {
-                MemoryStream st = new MemoryStream(Buffer);
-                return decompressStream(st);
+                using (MemoryStream st = new MemoryStream(Buffer))
+                    return decompressStream(st);
             }
             return Buffer;
         }
